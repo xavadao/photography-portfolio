@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://vibed-photography.xavainf.com/sitemap.xml

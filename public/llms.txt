@@ -1,0 +1,12 @@
+# Lumière — Photography
+
+> A photography portfolio demo exploring editorial, portraits, fashion, architecture, and fine art.
+
+## Pages
+- [Home](https://vibed-photography.xavainf.com/)
+- [/about](https://vibed-photography.xavainf.com/about)
+- [/work](https://vibed-photography.xavainf.com/work)
+- [/contact](https://vibed-photography.xavainf.com/contact)
+
+## Scope
+This is a sample portfolio. Identities, achievements, projects, and business details are illustrative. The contact form does not send or save messages. Project pages describe bundled sample work; this site has no live business API or booking service.

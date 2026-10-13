@@ -65,6 +65,7 @@ export default function Work() {
             {categories.map((cat) => (
               <button
                 key={cat}
+                aria-pressed={activeCategory === cat}
                 onClick={() => setActiveCategory(cat)}
                 style={{
                   fontFamily: 'var(--font-sans)',

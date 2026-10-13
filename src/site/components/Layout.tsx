@@ -24,6 +24,7 @@ export default function Layout({ children, hideFooter = false }: LayoutProps) {
       <CustomCursor />
       <Nav />
       <main
+        id="main-content" tabIndex={-1}
         className="page-enter"
         key={location.pathname}
         style={{ minHeight: '100vh' }}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 type FormState = 'idle' | 'sending' | 'sent' | 'error';
@@ -9,6 +9,7 @@ export default function Contact() {
   const [formState, setFormState] = useState<FormState>('idle');
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const bodyRef = useScrollReveal();
+  useEffect(() => { if (formState === 'sent') document.getElementById('contact-confirmation')?.focus(); }, [formState]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -228,7 +229,7 @@ export default function Contact() {
                     <path d="M4 10l4 4 8-8" stroke="var(--white)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-                <h3
+                <h3 id="contact-confirmation" tabIndex={-1} role="status"
                   style={{
                     fontFamily: 'var(--font-serif)',
                     fontSize: '2rem',
@@ -257,7 +258,7 @@ export default function Contact() {
                 <div style={{ marginBottom: '0.5rem' }}>
                   <input
                     type="text"
-                    placeholder="Your Name"
+                    id="contact-name" name="name" aria-label="Name" autoComplete="name" placeholder="Your Name"
                     required
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: (e.target as HTMLInputElement).value })}
@@ -273,7 +274,7 @@ export default function Contact() {
                 <div style={{ marginBottom: '0.5rem' }}>
                   <input
                     type="email"
-                    placeholder="Email Address"
+                    id="contact-email" name="email" aria-label="Email address" autoComplete="email" spellCheck={false} placeholder="Email Address"
                     required
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: (e.target as HTMLInputElement).value })}
@@ -288,7 +289,7 @@ export default function Contact() {
                 </div>
                 <div style={{ marginBottom: '3rem' }}>
                   <textarea
-                    placeholder="Tell me about your project..."
+                    id="contact-message" name="message" aria-label="Project message" placeholder="Tell me about your project..."
                     required
                     rows={5}
                     value={form.message}

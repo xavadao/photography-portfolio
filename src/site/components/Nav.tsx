@@ -9,6 +9,25 @@ export default function Nav() {
   const location = useLocation();
 
   useEffect(() => {
+    if (!menuOpen) return;
+    const menu = document.getElementById('mobile-navigation');
+    const links = Array.from(menu?.querySelectorAll<HTMLAnchorElement>('a[href]') ?? []);
+    const previous = document.activeElement as HTMLElement | null;
+    const oldOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    links[0]?.focus();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { event.preventDefault(); setMenuOpen(false); }
+      if (event.key === 'Tab' && links.length) {
+        if (event.shiftKey && document.activeElement === links[0]) { event.preventDefault(); links.at(-1)?.focus(); }
+        else if (!event.shiftKey && document.activeElement === links.at(-1)) { event.preventDefault(); links[0].focus(); }
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = oldOverflow; previous?.focus(); };
+  }, [menuOpen]);
+
+  useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -104,6 +123,8 @@ export default function Nav() {
           onClick={() => setMenuOpen(!menuOpen)}
           className="nav-mobile-btn"
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
           style={{
             display: 'none',
             flexDirection: 'column',
@@ -148,7 +169,7 @@ export default function Nav() {
       </nav>
 
       {/* Mobile menu overlay */}
-      <div
+      <div id="mobile-navigation" role="navigation" aria-label="Mobile navigation" aria-hidden={!menuOpen} inert={!menuOpen}
         style={{
           position: 'fixed',
           inset: 0,
