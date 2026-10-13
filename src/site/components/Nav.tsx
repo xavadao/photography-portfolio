@@ -7,6 +7,8 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const overHero = location.pathname === '/' && !scrolled;
+  const inactiveColor = overHero ? 'var(--gray-light)' : 'var(--gray-mid)';
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -59,7 +61,7 @@ export default function Nav() {
           alignItems: 'center',
           justifyContent: 'space-between',
           transition: 'background-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), backdrop-filter 0.5s ease',
-          backgroundColor: scrolled ? 'rgba(10,10,10,0.92)' : 'transparent',
+          background: scrolled ? 'rgba(10,10,10,0.92)' : overHero ? 'linear-gradient(180deg, rgba(10,10,10,.78), rgba(10,10,10,.48))' : 'transparent',
           backdropFilter: scrolled ? 'blur(12px)' : 'none',
           borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
         }}
@@ -100,7 +102,7 @@ export default function Nav() {
                   fontWeight: 500,
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
-                  color: location.pathname === to ? 'var(--white)' : 'var(--gray-mid)',
+                  color: location.pathname === to ? 'var(--white)' : inactiveColor,
                   transition: 'color 0.25s ease',
                   position: 'relative',
                 }}
@@ -109,7 +111,7 @@ export default function Nav() {
                 }}
                 onMouseLeave={(e) => {
                   (e.currentTarget as HTMLAnchorElement).style.color =
-                    location.pathname === to ? 'var(--white)' : 'var(--gray-mid)';
+                    location.pathname === to ? 'var(--white)' : inactiveColor;
                 }}
               >
                 {label}
@@ -194,7 +196,7 @@ export default function Nav() {
               fontFamily: 'var(--font-serif)',
               fontSize: 'clamp(2rem, 8vw, 4rem)',
               fontWeight: 700,
-              color: location.pathname === to ? 'var(--white)' : 'var(--gray-mid)',
+              color: location.pathname === to ? 'var(--white)' : inactiveColor,
               letterSpacing: '-0.02em',
               transition: 'color 0.25s ease',
             }}

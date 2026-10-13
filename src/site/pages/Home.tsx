@@ -138,6 +138,8 @@ export default function Home() {
               className="eyebrow"
               style={{
                 marginBottom: '1.5rem',
+                color: 'var(--white)',
+                textShadow: '0 1px 3px rgba(0,0,0,.85)',
                 opacity: 0,
                 animation: 'heroFadeUp 1s 0.3s cubic-bezier(0.25,0.46,0.45,0.94) forwards',
               }}
