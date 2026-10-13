@@ -1,0 +1,364 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap");
+/* Tailwind v4 — config lives here only. There is no tailwind.config.js; do not add one. */
+@import "tailwindcss";
+
+/* From the Vite template's index.html <style>. */
+/* Minimal critical CSS - keep default tokens in sync with globals.css */
+:root {
+	color-scheme: dark;
+	--background: 0 0% 4%;
+	--foreground: 0 0% 96%;
+}
+body {
+	background-color: hsl(var(--background));
+	color: hsl(var(--foreground));
+	min-height: 100vh;
+	margin: 0;
+}
+
+
+/*
+ * LUMIÈRE Photography — Luxury Editorial Design System
+ * Dark-mode, cinematic, high-contrast typography
+ */
+:root {
+	color-scheme: dark;
+
+	/* Core palette — deep black, soft white, muted gray */
+	--background: 0 0% 4%;
+	--foreground: 0 0% 96%;
+	--card: 0 0% 6%;
+	--card-foreground: 0 0% 96%;
+	--primary: 0 0% 96%;
+	--primary-foreground: 0 0% 4%;
+	--secondary: 0 0% 10%;
+	--secondary-foreground: 0 0% 96%;
+	--muted: 0 0% 8%;
+	--muted-foreground: 0 0% 52%;
+	--accent: 0 0% 18%;
+	--accent-foreground: 0 0% 96%;
+	--destructive: 0 70% 50%;
+	--destructive-foreground: 0 0% 98%;
+	--border: 0 0% 14%;
+	--input: 0 0% 10%;
+	--ring: 0 0% 60%;
+	--radius: 0rem;
+
+	/* Photography-specific tokens */
+	--overlay: rgba(10, 10, 10, 0.6);
+	--overlay-heavy: rgba(10, 10, 10, 0.85);
+	--overlay-light: rgba(10, 10, 10, 0.3);
+	--white: #F5F5F5;
+	--black: #0A0A0A;
+	--gray-mid: #888888;
+	--gray-light: #CCCCCC;
+	--gray-dark: #1A1A1A;
+
+	/* Typography scale */
+	--font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+	--font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: ui-monospace, 'Cascadia Code', monospace;
+
+	/* Motion */
+	--ease-cinematic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	--ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+	--duration-slow: 0.8s;
+	--duration-medium: 0.5s;
+	--duration-fast: 0.25s;
+
+	/* Spacing */
+	--section-padding: clamp(4rem, 10vw, 10rem);
+	--container-max: 1440px;
+}
+
+/* Tailwind v4 Theme */
+@theme {
+	--color-background: hsl(var(--background));
+	--color-foreground: hsl(var(--foreground));
+	--color-card: hsl(var(--card));
+	--color-card-foreground: hsl(var(--card-foreground));
+	--color-primary: hsl(var(--primary));
+	--color-primary-foreground: hsl(var(--primary-foreground));
+	--color-secondary: hsl(var(--secondary));
+	--color-secondary-foreground: hsl(var(--secondary-foreground));
+	--color-muted: hsl(var(--muted));
+	--color-muted-foreground: hsl(var(--muted-foreground));
+	--color-accent: hsl(var(--accent));
+	--color-accent-foreground: hsl(var(--accent-foreground));
+	--color-destructive: hsl(var(--destructive));
+	--color-destructive-foreground: hsl(var(--destructive-foreground));
+	--color-border: hsl(var(--border));
+	--color-input: hsl(var(--input));
+	--color-ring: hsl(var(--ring));
+
+	--radius-sm: 0rem;
+	--radius-md: 0rem;
+	--radius-lg: 0rem;
+
+	--font-serif: var(--font-serif);
+	--font-sans: var(--font-sans);
+	--font-mono: var(--font-mono);
+}
+
+/* Base styles */
+@layer base {
+	*, *::before, *::after {
+		box-sizing: border-box;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		margin: 0;
+		background-color: var(--black);
+		color: var(--white);
+		font-family: var(--font-sans);
+		font-weight: 300;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		overflow-x: hidden;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: var(--font-serif);
+		font-weight: 700;
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+		margin: 0;
+	}
+
+	p {
+		margin: 0;
+		line-height: 1.7;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+	}
+
+	button {
+		cursor: pointer;
+		border: none;
+		background: none;
+		font-family: inherit;
+	}
+
+	code {
+		font-family: var(--font-mono);
+	}
+}
+
+/* ============================================================
+   SCROLL REVEAL ANIMATIONS
+   ============================================================ */
+@layer utilities {
+	.reveal {
+		opacity: 0;
+		transform: translateY(32px);
+		transition: opacity var(--duration-slow) var(--ease-cinematic),
+		            transform var(--duration-slow) var(--ease-cinematic);
+	}
+
+	.reveal.visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.reveal-delay-1 { transition-delay: 0.1s; }
+	.reveal-delay-2 { transition-delay: 0.2s; }
+	.reveal-delay-3 { transition-delay: 0.35s; }
+	.reveal-delay-4 { transition-delay: 0.5s; }
+
+	.reveal-fade {
+		opacity: 0;
+		transition: opacity var(--duration-slow) var(--ease-cinematic);
+	}
+
+	.reveal-fade.visible {
+		opacity: 1;
+	}
+
+	/* Image reveal mask */
+	.reveal-mask {
+		clip-path: inset(100% 0 0 0);
+		transition: clip-path 1s var(--ease-cinematic);
+	}
+
+	.reveal-mask.visible {
+		clip-path: inset(0% 0 0 0);
+	}
+}
+
+/* ============================================================
+   GALLERY HOVER INTERACTIONS
+   ============================================================ */
+@layer components {
+	.gallery-item {
+		position: relative;
+		overflow: hidden;
+		cursor: pointer;
+	}
+
+	.gallery-item img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.8s var(--ease-cinematic);
+	}
+
+	.gallery-item:hover img {
+		transform: scale(1.05);
+	}
+
+	.gallery-item .overlay {
+		position: absolute;
+		inset: 0;
+		background: var(--overlay);
+		opacity: 0;
+		transition: opacity 0.5s var(--ease-smooth);
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		padding: 2rem;
+	}
+
+	.gallery-item:hover .overlay {
+		opacity: 1;
+	}
+
+	/* CTA Button */
+	.btn-primary {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 1rem 2.5rem;
+		border: 1px solid var(--white);
+		color: var(--white);
+		font-family: var(--font-sans);
+		font-size: 0.75rem;
+		font-weight: 500;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		transition: background-color var(--duration-fast) var(--ease-smooth),
+		            color var(--duration-fast) var(--ease-smooth),
+		            transform var(--duration-fast) var(--ease-smooth);
+	}
+
+	.btn-primary:hover {
+		background-color: var(--white);
+		color: var(--black);
+		transform: scale(1.02);
+	}
+
+	.btn-primary:active {
+		transform: scale(0.97);
+	}
+
+	.btn-ghost {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: var(--gray-mid);
+		font-family: var(--font-sans);
+		font-size: 0.75rem;
+		font-weight: 500;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		transition: color var(--duration-fast) var(--ease-smooth),
+		            transform var(--duration-fast) var(--ease-smooth);
+	}
+
+	.btn-ghost:hover {
+		color: var(--white);
+		transform: translateX(4px);
+	}
+
+	/* Section container */
+	.section-container {
+		max-width: var(--container-max);
+		margin: 0 auto;
+		padding: 0 clamp(1.5rem, 5vw, 5rem);
+	}
+
+	/* Eyebrow label */
+	.eyebrow {
+		font-family: var(--font-sans);
+		font-size: 0.7rem;
+		font-weight: 500;
+		letter-spacing: 0.25em;
+		text-transform: uppercase;
+		color: var(--gray-mid);
+	}
+
+	/* Divider line */
+	.divider {
+		width: 100%;
+		height: 1px;
+		background-color: var(--gray-dark);
+	}
+
+	/* Page transition wrapper */
+	.page-enter {
+		animation: pageEnter 0.6s var(--ease-cinematic) forwards;
+	}
+
+	@keyframes pageEnter {
+		from {
+			opacity: 0;
+			transform: translateY(16px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* Philosophy split layout — stack on mobile */
+	.philosophy-layout {
+		display: grid;
+		grid-template-columns: 55fr 45fr;
+	}
+
+	@media (max-width: 768px) {
+		.philosophy-layout {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	/* Cursor dot */
+	.cursor-dot {
+		width: 8px;
+		height: 8px;
+		background: var(--white);
+		border-radius: 50%;
+		position: fixed;
+		pointer-events: none;
+		z-index: 9999;
+		transition: transform 0.15s var(--ease-smooth),
+		            opacity 0.3s var(--ease-smooth);
+		mix-blend-mode: difference;
+	}
+
+	.cursor-ring {
+		width: 36px;
+		height: 36px;
+		border: 1px solid rgba(245, 245, 245, 0.5);
+		border-radius: 50%;
+		position: fixed;
+		pointer-events: none;
+		z-index: 9998;
+		transition: transform 0.4s var(--ease-cinematic),
+		            width 0.3s var(--ease-smooth),
+		            height 0.3s var(--ease-smooth),
+		            opacity 0.3s var(--ease-smooth);
+		mix-blend-mode: difference;
+	}
+}
