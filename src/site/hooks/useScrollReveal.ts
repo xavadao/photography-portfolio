@@ -4,8 +4,9 @@ import { useEffect, useRef } from 'react';
  * Attaches IntersectionObserver to a container element.
  * All children with class "reveal", "reveal-fade", or "reveal-mask"
  * get the "visible" class added when they enter the viewport.
+ * Pass a refresh key when filtering can mount new reveal elements.
  */
-export function useScrollReveal(threshold = 0.15) {
+export function useScrollReveal(threshold = 0.15, refreshKey?: string) {
   const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export function useScrollReveal(threshold = 0.15) {
     targets.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, [threshold]);
+  }, [threshold, refreshKey]);
 
   return ref;
 }

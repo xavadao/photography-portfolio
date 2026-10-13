@@ -19,7 +19,7 @@ function getHeight(index: number): string {
 
 export default function Work() {
   const [activeCategory, setActiveCategory] = useState('All');
-  const gridRef = useScrollReveal(0.05);
+  const gridRef = useScrollReveal(0.05, activeCategory);
 
   const filtered = activeCategory === 'All'
     ? projects

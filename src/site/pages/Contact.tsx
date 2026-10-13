@@ -237,7 +237,7 @@ export default function Contact() {
                     marginBottom: '1rem',
                   }}
                 >
-                  Message received.
+                  Demo completed.
                 </h3>
                 <p
                   style={{
@@ -247,9 +247,9 @@ export default function Contact() {
                     lineHeight: 1.7,
                   }}
                 >
-                  Thank you for reaching out.
+                  This is a demo form.
                   <br />
-                  I'll be in touch within 48 hours.
+                  Your message was not sent or saved.
                 </p>
               </div>
             ) : (
